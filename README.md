@@ -37,6 +37,8 @@ cmake --build build
 
 ```powershell
 .\build\queue_tests.exe
+
+cmake --build build && ./build/queue_tests
 ```
 
 ## 运行结果说明
