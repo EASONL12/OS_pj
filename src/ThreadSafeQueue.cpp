@@ -30,6 +30,7 @@ void ThreadSafeQueue::EnQueue(int value) {
     // 写线程进入临界区前先获取独占锁，防止与其他读写线程并发修改队列。
     std::unique_lock<std::shared_mutex> lock(rwlock);
 
+    
     // 动态创建新结点，并先把 next 置空。
     // 作为新的队尾结点，它后面暂时不应再连接任何结点。
     Node* node = new Node;
@@ -53,6 +54,7 @@ void ThreadSafeQueue::EnQueue(int value) {
 bool ThreadSafeQueue::DeQueue(int& value) {
     // 删除结点会修改链表结构，因此必须持有独占写锁。
     std::unique_lock<std::shared_mutex> lock(rwlock);
+
 
     // 空队列没有可删除结点，直接返回失败。
     if (front == nullptr) {
